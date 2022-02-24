@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\EmployeeStoreRequest;
 use App\Models\Employee;
+use App\Models\Title;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class EmployeeController extends Controller
@@ -39,7 +41,10 @@ class EmployeeController extends Controller
 
     public function create()
     {
-        return view( 'employee.create' );
+        $titles = Title::pluck('emp_no','title')->groupBy('title');
+
+        dd($titles);
+        return view( 'employee.create',compact('titles') );
     }
 
     public function store( EmployeeStoreRequest $request )
