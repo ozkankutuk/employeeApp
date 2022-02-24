@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeStoreRequest;
 use App\Models\Employee;
 use Auth;
 use Illuminate\Http\Request;
@@ -28,11 +29,21 @@ class EmployeeController extends Controller
 
             $total_department_salary = $user->employee->currentDepartmentManagement->first()->currentEmployees->salaries;
 
-            dd($total_department_salary);
+            dd( $total_department_salary );
 
             //return view( 'employee.index', compact( 'employee_salaries', 'employee_salaries_total', 'total_department_salary' ) );
         }
 
         return view( 'employee.index', compact( 'employee_salaries', 'employee_salaries_total' ) );
+    }
+
+    public function create()
+    {
+        return view( 'employee.create' );
+    }
+
+    public function store( EmployeeStoreRequest $request )
+    {
+
     }
 }
