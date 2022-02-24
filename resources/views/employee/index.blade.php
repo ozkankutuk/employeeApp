@@ -6,7 +6,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{ __('Dashboard') }}</div>
+                    <div class="card-header"><h5 class="card-title">Employee List</h5></div>
 
                     <div class="card-body">
                         @if (session('status'))
@@ -14,6 +14,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+
 
                         <table class="table table-bordered table-striped table-hover">
                             <tr>
@@ -23,6 +24,7 @@
                                 <th>LAST NAME</th>
                                 <th>GENDER</th>
                                 <th>HIRE DATE</th>
+                                <th>TOTal Salary</th>
                             </tr>
                             @foreach($employees as $employee)
                                 <tr>
@@ -32,12 +34,14 @@
                                     <td>{{ $employee->last_name }}</td>
                                     <td>{{ $employee->gender }}</td>
                                     <td>{{ $employee->hire_date }}</td>
+                                    <td><span class="float-end">{{ number_format($employee->salaries->sum('salary'),2,',','.') }}</span></td>
+                                    <td>{{ $employee->departments }}</td>
                                 </tr>
                             @endforeach
                         </table>
                     </div>
                     <div class="card-header">
-                        {{ $employees->links() }}
+{{--                        {{ $employees->links() }}--}}
                     </div>
                 </div>
             </div>

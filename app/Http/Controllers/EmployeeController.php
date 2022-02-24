@@ -9,8 +9,11 @@ class EmployeeController extends Controller
 {
     public function index()
     {
-        $employees = Employee::paginate();
+        $employees = Employee::with( 'salaries' )
+            ->with( 'departments' )
+            ->get();
 
+        //dd( $employees );
         return view( 'employee.index', compact( 'employees' ) );
     }
 }
