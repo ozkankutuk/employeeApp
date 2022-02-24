@@ -10,4 +10,6 @@ class Salary extends Model
     use HasFactory;
 
     protected $table = 'salaries';
+
+
 }

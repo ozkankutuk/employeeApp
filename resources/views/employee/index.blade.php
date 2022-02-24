@@ -2,46 +2,58 @@
 
 @section('content')
 
-    <div class="container">
+    <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h5 class="card-title">Employee List</h5></div>
-
                     <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
 
-
+                        <h4>Maaş Tablom</h4>
                         <table class="table table-bordered table-striped table-hover">
+                            <thead>
                             <tr>
-                                <th>EMP CODE</th>
-                                <th>BIRTH DATE</th>
-                                <th>FIRST NAME</th>
-                                <th>LAST NAME</th>
-                                <th>GENDER</th>
-                                <th>HIRE DATE</th>
-                                <th>TOTal Salary</th>
+                                <th>#</th>
+                                <th>PRICE</th>
+                                <th>FROM DATE / TO DATE</th>
                             </tr>
-                            @foreach($employees as $employee)
+                            </thead>
+
+                            <tbody>
+                            @foreach($employee_salaries as $employe_salary)
                                 <tr>
-                                    <td>{{ $employee->emp_no }}</td>
-                                    <td>{{ $employee->birth_date }}</td>
-                                    <td>{{ $employee->first_name }}</td>
-                                    <td>{{ $employee->last_name }}</td>
-                                    <td>{{ $employee->gender }}</td>
-                                    <td>{{ $employee->hire_date }}</td>
-                                    <td><span class="float-end">{{ number_format($employee->salaries->sum('salary'),2,',','.') }}</span></td>
-                                    <td>{{ $employee->departments }}</td>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ number_format($employe_salary->salary,2,',','.') }}</td>
+                                    <td>{{ $employe_salary->from_date }} -> {{ $employe_salary->to_date }}</td>
                                 </tr>
                             @endforeach
+                            </tbody>
+
+                            <tfoot>
+                            <tr>
+                                <td colspan="3"><strong>Total Salary: {{ number_format($employee_salaries_total,2,',','.') }}</strong></td>
+                            </tr>
+                            </tfoot>
                         </table>
-                    </div>
-                    <div class="card-header">
-{{--                        {{ $employees->links() }}--}}
+
+                        <h4>Personel Maaş Tablosu</h4>
+
+                        <table class="table table-bordered table-hover table-striped">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>1</th>
+                                <th>2</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>2</td>
+                                <td>3</td>
+                            </tr>
+                            </tbody>
+                        </table>
+
                     </div>
                 </div>
             </div>

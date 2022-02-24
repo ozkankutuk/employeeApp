@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        Gate::define( 'isDepartmentManager', function ( $user ) {
+            if ( auth()->user()->employee->currentDepartmentManagement->count() ) {
+                return true;
+            } else {
+                return false;
+            }
+        } );
+
     }
 }

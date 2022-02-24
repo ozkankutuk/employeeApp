@@ -20,12 +20,55 @@ class Employee extends Model
 
     public function salaries(): HasMany
     {
-        return $this->hasMany( Salary::class, 'emp_no', 'emp_no' );
+        return $this->hasMany( Salary::class,
+            'emp_no',
+            'emp_no' );
     }
 
     public function departments(): BelongsToMany
     {
-        return $this->belongsToMany( Department::class, 'dept_manager', 'dept_no', 'dept_no', 'dept_no', 'dept_no' );
+        return $this->belongsToMany( Department::class,
+            'dept_emp',
+            'emp_no',
+            'dept_no',
+            'emp_no',
+            'dept_no', );
     }
+
+    public function departmentManagements(): BelongsToMany
+    {
+        return $this->belongsToMany( Department::class,
+            'dept_manager',
+            'emp_no',
+            'dept_no',
+            'emp_no',
+            'dept_no', );
+    }
+
+    public function currentDepartmentManagement(): BelongsToMany
+    {
+        return $this->belongsToMany( Department::class,
+            'dept_manager',
+            'emp_no',
+            'dept_no',
+            'emp_no',
+            'dept_no', )
+            ->where( 'to_date', '!=', '9999-01-01' );
+    }
+
+    public function current_department(): BelongsToMany
+    {
+        return $this->belongsToMany( Department::class,
+            'dept_emp',
+            'emp_no',
+            'dept_no',
+            'emp_no',
+            'dept_no', )
+            ->where( 'to_date', '!=', '9999-01-01' );
+    }
+
+
+
+
 }
 
